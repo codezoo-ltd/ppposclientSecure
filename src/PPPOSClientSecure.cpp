@@ -52,14 +52,12 @@ PPPOSClientSecure::PPPOSClientSecure(int sock) {
 }
 
 PPPOSClientSecure::~PPPOSClientSecure() {
-  log_v("-----------------------------111");
   stop();
   delete sslclient;
 }
 
 PPPOSClientSecure &
 PPPOSClientSecure::operator=(const PPPOSClientSecure &other) {
-  log_v("-----------------------------222");
   stop();
   sslclient->socket = other.sslclient->socket;
   _connected = other._connected;
@@ -74,7 +72,6 @@ void PPPOSClientSecure::stop() {
     _peek = -1;
   }
 
-  log_v("-----------------------------333");
   stop_ssl_socket(sslclient, _CA_cert, _cert, _private_key);
 }
 
@@ -105,7 +102,6 @@ int PPPOSClientSecure::connect(const char *host, uint16_t port,
   _lastError = ret;
   if (ret < 0) {
     log_e("start_ssl_client: %d", ret);
-    log_v("-----------------------------444");
     stop();
     return 0;
   }
@@ -127,7 +123,6 @@ int PPPOSClientSecure::connect(const char *host, uint16_t port,
   _lastError = ret;
   if (ret < 0) {
     log_e("start_ssl_client: %d", ret);
-    log_v("-----------------------------555");
     stop();
     return 0;
   }
@@ -163,7 +158,6 @@ size_t PPPOSClientSecure::write(const uint8_t *buf, size_t size) {
 
   if (res < 0) {
     log_v("send_ssl_data stop!!!");
-    log_v("-----------------------------666");
     stop();
     res = 0;
   }
@@ -194,7 +188,6 @@ int PPPOSClientSecure::read(uint8_t *buf, size_t size) {
   int res = get_ssl_receive(sslclient, buf, size);
   log_v("get_ssl_receive with %d return", res);
   if (res < 0) {
-    log_v("-----------------------------777");
     stop();
     return peeked ? peeked : res;
   }
@@ -209,7 +202,6 @@ int PPPOSClientSecure::available() {
   int res = data_to_read(sslclient);
   //	log_v("data_to_read with %d return",res);
   if (res < 0) {
-    log_v("-----------------------------888");
     stop();
     return peeked ? peeked : res;
   }
