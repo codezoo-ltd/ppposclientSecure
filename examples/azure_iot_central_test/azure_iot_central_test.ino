@@ -28,6 +28,7 @@ char *ppp_user = "codezoo";
 char *ppp_pass = "codezoo";
 String APN = "simplio.apn";
 
+//#define BATT_REPORT 21600000 //6hour
 #define BATT_REPORT 3600000 // 1hour
 //#define BATT_REPORT 600000  //10min
 //#define BATT_REPORT 10000  //10sec
@@ -256,5 +257,4 @@ void loop() {
     iot.connect();
     Serial.println("iot Connect Complete!");
   }
-  delay(1);
 }
