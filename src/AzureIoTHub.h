@@ -10,7 +10,7 @@
 #include "mbedtls/sha256.h"
 
 #define JSON_DOC_BUFFER_SIZE 1024
-#define TOKEN_LIFESPAN       60 // In min
+#define TOKEN_LIFESPAN       (60*24) // 1Day
 #define MQTT_PACKET_SIZE     1024
 
 typedef std::function<void(String payload)> CommandHandlerFunction;
